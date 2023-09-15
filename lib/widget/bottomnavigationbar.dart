@@ -1,6 +1,6 @@
 import 'package:financify/screens/Statistics.dart';
-import 'package:financify/screens/add_screen.dart';
-import 'package:financify/screens/home_screen.dart';
+import 'package:financify/screens/addscreen/add_screen.dart';
+import 'package:financify/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class BottomBar extends StatefulWidget {

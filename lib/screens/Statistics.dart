@@ -9,7 +9,7 @@ class Statistics extends StatefulWidget {
 }
 
 class _StatisticsState extends State<Statistics> {
-  List day = ['day', 'week', 'month', 'year'];
+  List day = ['Day', 'Week', 'Month', 'Year'];
   int index_color = 0;
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class _StatisticsState extends State<Statistics> {
                   height: 20,
                 ),
                 Text(
-                  'statistics',
+                  'Statistics',
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20,
