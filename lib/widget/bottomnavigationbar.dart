@@ -1,7 +1,10 @@
-import 'package:financify/screens/Statistics.dart';
+import 'package:financify/screens/settings/settings.dart';
+import 'package:financify/screens/statistics/Statistics.dart';
 import 'package:financify/screens/addscreen/add_screen.dart';
 import 'package:financify/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../screens/transaction/transaction_lists.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -15,8 +18,8 @@ class _Bottom_BarState extends State<BottomBar> {
   List Screen = [
     home_screen(),
     Statistics(),
-    home_screen(),
-    Statistics(),
+    TrasnsactionList(),
+    settings(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -74,7 +77,7 @@ class _Bottom_BarState extends State<BottomBar> {
                   });
                 },
                 child: Icon(
-                  Icons.account_balance_rounded,
+                  Icons.find_replace_outlined,
                   size: 30,
                   color: index_color == 2 ? Colors.black : Colors.grey,
                 ),
@@ -86,7 +89,7 @@ class _Bottom_BarState extends State<BottomBar> {
                   });
                 },
                 child: Icon(
-                  Icons.person_4_outlined,
+                  Icons.settings,
                   size: 30,
                   color: index_color == 3 ? Colors.black : Colors.grey,
                 ),

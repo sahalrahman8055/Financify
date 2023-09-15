@@ -109,7 +109,7 @@ class _AddScreenState extends State<AddScreen> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(width: 2, color: Colors.black54)),
-      width: 300,
+      width: 310,
       child: TextButton(
           onPressed: () async {
             DateTime? newDate = await showDatePicker(

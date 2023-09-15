@@ -1,4 +1,4 @@
-import 'package:financify/screens/Statistics.dart';
+import 'package:financify/screens/statistics/Statistics.dart';
 import 'package:financify/screens/home_screen/home_screen.dart';
 import 'package:financify/widget/bottomnavigationbar.dart';
 import 'package:flutter/material.dart';
