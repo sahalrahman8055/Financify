@@ -1,9 +1,14 @@
-import 'package:financify/screens/statistics/Statistics.dart';
-import 'package:financify/screens/home_screen/home_screen.dart';
 import 'package:financify/widget/bottomnavigationbar.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+import 'data/model/add_data.dart';
+
+void main() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(AdddataAdapter());
+  await Hive.openBox<Add_data>('data');
+
   runApp(const MyApp());
 }
 

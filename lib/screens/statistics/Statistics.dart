@@ -1,5 +1,6 @@
 import 'package:financify/widget/chart.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Statistics extends StatefulWidget {
   const Statistics({super.key});
@@ -14,22 +15,22 @@ class _StatisticsState extends State<Statistics> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: Center(
+          child: Text('Statistics',
+              style: GoogleFonts.ubuntu(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              )),
+        ),
+      ),
       body: SafeArea(
           child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
             child: Column(
               children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'Statistics',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20,
-                      color: Colors.black54),
-                ),
                 SizedBox(
                   height: 20,
                 ),

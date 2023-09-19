@@ -1,5 +1,9 @@
+import 'package:financify/data/model/add_data.dart';
 import 'package:financify/screens/addscreen/widgets/background_container.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
+import '../../widget/bottomnavigationbar.dart';
 
 class AddScreen extends StatefulWidget {
   const AddScreen({super.key});
@@ -9,6 +13,7 @@ class AddScreen extends StatefulWidget {
 }
 
 class _AddScreenState extends State<AddScreen> {
+  final box = Hive.box<Add_data>('data');
   DateTime date = DateTime.now();
   String? selectedItem;
   String? selectedItemi;
@@ -16,8 +21,12 @@ class _AddScreenState extends State<AddScreen> {
   FocusNode ex = FocusNode();
   final TextEditingController amount_c = TextEditingController();
   FocusNode amount_ = FocusNode();
-
-  final List<String> _item = ['Food', 'Transportation', 'Education'];
+  final List<String> _item = [
+    'food',
+    "Transfer",
+    "Transportation",
+    "Education"
+  ];
   final List<String> _itemei = [
     'income',
     'expense',
@@ -69,7 +78,7 @@ class _AddScreenState extends State<AddScreen> {
           SizedBox(height: 30),
           amount(),
           SizedBox(height: 30),
-          how(),
+          type(),
           SizedBox(height: 30),
           date_time(),
           Spacer(),
@@ -84,7 +93,16 @@ class _AddScreenState extends State<AddScreen> {
 
   GestureDetector save() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        setState(() {
+          var add = Add_data(selectedItemi!, amount_c.text, date,
+              explain_c.text, selectedItem!);
+          box.add(add);
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => BottomBar(),
+          ));
+        });
+      },
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
@@ -129,7 +147,7 @@ class _AddScreenState extends State<AddScreen> {
     );
   }
 
-  Padding how() {
+  Padding type() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Container(
@@ -150,11 +168,6 @@ class _AddScreenState extends State<AddScreen> {
                     child: Container(
                       child: Row(
                         children: [
-                          Container(
-                            width: 40,
-                            child: Image.asset('assets/images/${e}.png'),
-                          ),
-                          SizedBox(width: 10),
                           Text(
                             e,
                             style: TextStyle(fontSize: 18),
@@ -168,18 +181,16 @@ class _AddScreenState extends State<AddScreen> {
           selectedItemBuilder: (BuildContext context) => _itemei
               .map((e) => Row(
                     children: [
-                      Container(
-                        width: 42,
-                        // child: Image.asset('assets/images?${e}.png'),
-                      ),
-                      SizedBox(width: 5),
-                      Text(e)
+                      Text(e),
                     ],
                   ))
               .toList(),
-          hint: Text(
-            "how",
-            style: TextStyle(color: Colors.grey),
+          hint: Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: Text(
+              "type",
+              style: TextStyle(color: Colors.grey),
+            ),
           ),
           dropdownColor: Colors.white,
           isExpanded: true,
@@ -237,25 +248,30 @@ class _AddScreenState extends State<AddScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 15),
+        width: 300,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(width: 2, color: Colors.black54),
+          border: Border.all(
+            width: 2,
+            color: Color(0xffC5C5C5),
+          ),
         ),
         child: DropdownButton<String>(
           value: selectedItem,
-          onChanged: (value) {
+          onChanged: ((value) {
             setState(() {
               selectedItem = value!;
             });
-          },
+          }),
           items: _item
               .map((e) => DropdownMenuItem(
                     child: Container(
+                      alignment: Alignment.center,
                       child: Row(
                         children: [
                           Container(
                             width: 40,
-                            child: Image.asset('assets/images/${e}.png'),
+                            child: Image.asset('images/${e}.png'),
                           ),
                           SizedBox(width: 10),
                           Text(
@@ -273,16 +289,19 @@ class _AddScreenState extends State<AddScreen> {
                     children: [
                       Container(
                         width: 42,
-                        // child: Image.asset('assets/images?${e}.png'),
+                        child: Image.asset('images/${e}.png'),
                       ),
                       SizedBox(width: 5),
                       Text(e)
                     ],
                   ))
               .toList(),
-          hint: Text(
-            "name",
-            style: TextStyle(color: Colors.grey),
+          hint: Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: Text(
+              'Name',
+              style: TextStyle(color: Colors.grey),
+            ),
           ),
           dropdownColor: Colors.white,
           isExpanded: true,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class settings extends StatelessWidget {
   const settings({super.key});
@@ -7,7 +8,13 @@ class settings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("Settings")),
+        title: Center(
+          child: Text('settings',
+              style: GoogleFonts.ubuntu(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              )),
+        ),
         backgroundColor: Colors.black,
       ),
       body: SafeArea(
