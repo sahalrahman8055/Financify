@@ -17,18 +17,19 @@ class AdddataAdapter extends TypeAdapter<Add_data> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Add_data(
-      fields[3] as String,
-      fields[2] as String,
-      fields[4] as DateTime,
-      fields[1] as String,
-      fields[0] as String,
+      type: fields[3] as String,
+      amount: fields[2] as String,
+      datetime: fields[4] as DateTime,
+      explain: fields[1] as String,
+      name: fields[0] as String,
+      id: fields[5] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Add_data obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -36,9 +37,11 @@ class AdddataAdapter extends TypeAdapter<Add_data> {
       ..writeByte(2)
       ..write(obj.amount)
       ..writeByte(3)
-      ..write(obj.IN)
+      ..write(obj.type)
       ..writeByte(4)
-      ..write(obj.datetime);
+      ..write(obj.datetime)
+      ..writeByte(5)
+      ..write(obj.id);
   }
 
   @override

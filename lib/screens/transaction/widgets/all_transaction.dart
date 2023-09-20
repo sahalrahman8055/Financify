@@ -1,11 +1,12 @@
-import 'package:financify/data/model/add_data.dart';
+import 'package:financify/db_functions/income_expenses.dart';
+import 'package:financify/db_functions/transaction_db.dart';
+import 'package:financify/model/add_data.dart';
+import 'package:financify/widget/uppercase.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class AllTransaction extends StatelessWidget {
   AllTransaction({super.key});
-  final box = Hive.box<Add_data>('data');
-  var backupdata;
+
   final List<String> day = [
     'Monday',
     "Tuesday",
@@ -15,35 +16,80 @@ class AllTransaction extends StatelessWidget {
     'saturday',
     'sunday'
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: ValueListenableBuilder(
-        valueListenable: box.listenable(),
-        builder: (context, value, child) {
-          return CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 15,
-                  ),
-                ),
-              ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    backupdata = box.values.toList().reversed.toList()[index];
-                    return getList(backupdata, index);
-                  },
-                  childCount: box.length,
-                ),
-              )
-            ],
-          );
-        },
-      )),
+        child: ValueListenableBuilder(
+            valueListenable: TransactionDB.instance.transactionListNotifier,
+            builder: (BuildContext ctx, List<Add_data> addedList, Widget? _) {
+              return (addedList.isEmpty)
+                  ? Column(
+                      children: [
+                        Center(
+                            // child: Image.asset(
+                            //   "photos/Empty Box.png",
+                            //   fit: BoxFit.fill,
+                            // ),
+                            ),
+                        const Center(
+                          child: Text('No transactions added yet'),
+                        ),
+                      ],
+                    )
+                  : ListView.separated(
+                      padding: const EdgeInsets.all(5),
+                      itemBuilder: (ctx, index) {
+                        final int lastIndex = transactionDB.length - 1;
+                        final int reversedIndex = lastIndex - index;
+                        final value = addedList[reversedIndex];
+                        return Card(
+                          color: Colors.transparent,
+                          elevation: 0,
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 50,
+                              child: Image.asset(
+                                  'assets/images/${value.name}.png',
+                                  height: 40),
+                            ),
+                            title: Text(
+                              value.explain.capitalize(),
+                              style: const TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            subtitle: Text(
+                              '${value.datetime.year}-${value.datetime.day}-${value.datetime.month}  ${day[value.datetime.weekday - 1]}',
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w600, fontSize: 13),
+                            ),
+                            trailing: Text(
+                              '₹ ${value.amount}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 17,
+                                color: value.type == 'income'
+                                    ? Colors.green
+                                    : Colors.red,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (ctx, index) {
+                        return const Divider(
+                          height: 4,
+                          thickness: 2,
+                        );
+                      },
+                      itemCount: addedList.length > 4 ? 4 : addedList.length,
+                    );
+            }),
+      ),
     );
   }
 
@@ -78,7 +124,7 @@ class AllTransaction extends StatelessWidget {
           style: TextStyle(
               fontSize: 19,
               fontWeight: FontWeight.w600,
-              color: backupdata.IN == 'income'
+              color: backupdata.type == 'income'
                   ? Colors.green.shade300
                   : Colors.redAccent)),
     );

@@ -145,34 +145,34 @@ class _StatisticsState extends State<Statistics> {
               ],
             ),
           ),
-          SliverList(delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              return ListTile(
-                // leading: Image.asset(' sahal you haveto start from here 59:59'),
-                title: Text(
-                  ' null',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 17,
-                      color: Colors.black),
-                ),
-                subtitle: Text(
-                  ' null',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 15,
-                      color: Colors.black54),
-                ),
-                trailing: Text(
-                  ' 500',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 19,
-                      color: Colors.red),
-                ),
-              );
-            },
-          ))
+          // SliverList(delegate: SliverChildBuilderDelegate(
+          //   (context, index) {
+          //     return ListTile(
+          //       // leading: Image.asset(' sahal you haveto start from here 59:59'),
+          //       title: Text(
+          //         ' null',
+          //         style: TextStyle(
+          //             fontWeight: FontWeight.w600,
+          //             fontSize: 17,
+          //             color: Colors.black),
+          //       ),
+          //       subtitle: Text(
+          //         ' null',
+          //         style: TextStyle(
+          //             fontWeight: FontWeight.w500,
+          //             fontSize: 15,
+          //             color: Colors.black54),
+          //       ),
+          //       trailing: Text(
+          //         ' 500',
+          //         style: TextStyle(
+          //             fontWeight: FontWeight.bold,
+          //             fontSize: 19,
+          //             color: Colors.red),
+          //       ),
+          //     );
+          //   },
+          // ))
         ],
       )),
     );

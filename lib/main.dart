@@ -1,15 +1,21 @@
+import 'package:financify/db_functions/transaction_db.dart';
+import 'package:financify/model/add_data.dart';
 import 'package:financify/widget/bottomnavigationbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'data/model/add_data.dart';
-
-void main() async {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  Hive.registerAdapter(AdddataAdapter());
-  await Hive.openBox<Add_data>('data');
+
+  if (!Hive.isAdapterRegistered(AdddataAdapter().typeId)) {
+    Hive.registerAdapter(AdddataAdapter());
+  }
+
+  await Hive.openBox<Add_data>(transactionDBName);
 
   runApp(const MyApp());
+  TransactionDB().getAllTransactions();
 }
 
 class MyApp extends StatelessWidget {

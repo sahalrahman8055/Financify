@@ -1,9 +1,11 @@
-import 'package:financify/data/model/add_data.dart';
+import 'package:financify/db_functions/transaction_db.dart';
+import 'package:financify/model/add_data.dart';
 import 'package:financify/screens/addscreen/widgets/background_container.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-
 import '../../widget/bottomnavigationbar.dart';
+
+ValueNotifier<List<Add_data>> overViewListNotifier =
+    ValueNotifier(TransactionDB.instance.transactionListNotifier.value);
 
 class AddScreen extends StatefulWidget {
   const AddScreen({super.key});
@@ -13,13 +15,13 @@ class AddScreen extends StatefulWidget {
 }
 
 class _AddScreenState extends State<AddScreen> {
-  final box = Hive.box<Add_data>('data');
   DateTime date = DateTime.now();
-  String? selectedItem;
-  String? selectedItemi;
-  final TextEditingController explain_c = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  String? selectedCatogary;
+  String? selectedType;
+  final TextEditingController explainController = TextEditingController();
   FocusNode ex = FocusNode();
-  final TextEditingController amount_c = TextEditingController();
+  final TextEditingController amountController = TextEditingController();
   FocusNode amount_ = FocusNode();
   final List<String> _item = [
     'food',
@@ -33,16 +35,9 @@ class _AddScreenState extends State<AddScreen> {
   ];
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    ex.addListener(() {
-      setState(() {});
-    });
-    amount_.addListener(() {
-      setState(() {});
-    });
-  }
+  // void initState() {
+
+  // }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +49,7 @@ class _AddScreenState extends State<AddScreen> {
           BackgroundContainer(),
           Positioned(
             top: 120,
-            child: main_container(),
+            child: SingleChildScrollView(child: main_container()),
           ),
         ],
       )),
@@ -69,24 +64,27 @@ class _AddScreenState extends State<AddScreen> {
       ),
       height: 550,
       width: 340,
-      child: Column(
-        children: [
-          SizedBox(height: 50),
-          name(),
-          SizedBox(height: 30),
-          explain(),
-          SizedBox(height: 30),
-          amount(),
-          SizedBox(height: 30),
-          type(),
-          SizedBox(height: 30),
-          date_time(),
-          Spacer(),
-          save(),
-          SizedBox(
-            height: 20,
-          )
-        ],
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            SizedBox(height: 50),
+            name(),
+            SizedBox(height: 30),
+            explain(),
+            SizedBox(height: 30),
+            amount(),
+            SizedBox(height: 30),
+            type(),
+            SizedBox(height: 30),
+            date_time(),
+            Spacer(),
+            save(),
+            SizedBox(
+              height: 20,
+            )
+          ],
+        ),
       ),
     );
   }
@@ -94,14 +92,9 @@ class _AddScreenState extends State<AddScreen> {
   GestureDetector save() {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          var add = Add_data(selectedItemi!, amount_c.text, date,
-              explain_c.text, selectedItem!);
-          box.add(add);
-          Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => BottomBar(),
-          ));
-        });
+        if (_formKey.currentState!.validate()) {
+          addTransaction();
+        }
       },
       child: Container(
         alignment: Alignment.center,
@@ -157,10 +150,10 @@ class _AddScreenState extends State<AddScreen> {
           border: Border.all(width: 2, color: Colors.black54),
         ),
         child: DropdownButton<String>(
-          value: selectedItemi,
+          value: selectedType,
           onChanged: ((value) {
             setState(() {
-              selectedItemi = value!;
+              selectedType = value!;
             });
           }),
           items: _itemei
@@ -206,7 +199,7 @@ class _AddScreenState extends State<AddScreen> {
       child: TextField(
         keyboardType: TextInputType.number,
         focusNode: amount_,
-        controller: amount_c,
+        controller: amountController,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           labelText: 'amount',
@@ -225,9 +218,9 @@ class _AddScreenState extends State<AddScreen> {
   Padding explain() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: TextField(
+      child: TextFormField(
         focusNode: ex,
-        controller: explain_c,
+        controller: explainController,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           labelText: 'explain',
@@ -239,6 +232,13 @@ class _AddScreenState extends State<AddScreen> {
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(width: 2, color: Colors.black)),
         ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Select explain';
+          } else {
+            return null;
+          }
+        },
       ),
     );
   }
@@ -257,10 +257,10 @@ class _AddScreenState extends State<AddScreen> {
           ),
         ),
         child: DropdownButton<String>(
-          value: selectedItem,
+          value: selectedCatogary,
           onChanged: ((value) {
             setState(() {
-              selectedItem = value!;
+              selectedCatogary = value!;
             });
           }),
           items: _item
@@ -271,7 +271,7 @@ class _AddScreenState extends State<AddScreen> {
                         children: [
                           Container(
                             width: 40,
-                            child: Image.asset('images/${e}.png'),
+                            child: Image.asset('assets/images/${e}.png'),
                           ),
                           SizedBox(width: 10),
                           Text(
@@ -289,7 +289,7 @@ class _AddScreenState extends State<AddScreen> {
                     children: [
                       Container(
                         width: 42,
-                        child: Image.asset('images/${e}.png'),
+                        child: Image.asset('assets/images/${e}.png'),
                       ),
                       SizedBox(width: 5),
                       Text(e)
@@ -307,6 +307,33 @@ class _AddScreenState extends State<AddScreen> {
           isExpanded: true,
           underline: Container(),
         ),
+      ),
+    );
+  }
+
+  Future addTransaction() async {
+    final model = Add_data(
+        type: selectedType!,
+        amount: amountController.text,
+        datetime: date,
+        explain: explainController.text,
+        name: selectedCatogary!,
+        id: DateTime.now().microsecondsSinceEpoch.toString());
+
+    await TransactionDB().addTransaction(model);
+
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (context) => BottomBar(),
+    ));
+    TransactionDB.instance.getAllTransactions();
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text(
+          'Transaction Added Successfully',
+          textAlign: TextAlign.center,
+        ),
+        duration: Duration(seconds: 3),
+        backgroundColor: Color(0xff368983),
       ),
     );
   }
