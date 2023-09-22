@@ -16,8 +16,6 @@ class SlidebleTransaction extends StatelessWidget {
         SlidableAction(
           onPressed: ((context) async {
             await TransactionDB().deleteTransaction(transaction);
-            // ignore: use_build_context_synchronously
-            Navigator.of(context).pop();
           }),
           icon: Icons.delete,
           foregroundColor: Colors.red,
@@ -34,7 +32,8 @@ class SlidebleTransaction extends StatelessWidget {
         child: ListTile(
           leading: ClipRRect(
             borderRadius: BorderRadius.circular(5),
-            child: Image.asset('images/${transaction.name}.png', height: 40),
+            child: Image.asset('assets/images/${transaction.name}.png',
+                height: 40),
           ),
           title: Text(
             transaction.explain.capitalize(),
@@ -52,7 +51,7 @@ class SlidebleTransaction extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 19,
-              color: transaction.type == 'Income' ? Colors.green : Colors.red,
+              color: transaction.type == 'income' ? Colors.green : Colors.red,
             ),
           ),
         ),
