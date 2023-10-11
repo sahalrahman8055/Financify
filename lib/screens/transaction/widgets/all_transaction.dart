@@ -60,7 +60,7 @@ class AllTransaction extends StatelessWidget {
                           thickness: 2,
                         );
                       },
-                      itemCount: addedList.length > 4 ? 4 : addedList.length,
+                      itemCount: addedList.length,
                     );
             }),
       ),

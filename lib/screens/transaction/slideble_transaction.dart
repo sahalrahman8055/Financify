@@ -1,5 +1,6 @@
 import 'package:financify/db_functions/transaction_db.dart';
 import 'package:financify/model/add_data.dart';
+import 'package:financify/widget/edit_transaction.dart';
 import 'package:financify/widget/uppercase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -13,6 +14,20 @@ class SlidebleTransaction extends StatelessWidget {
   Widget build(BuildContext context) {
     return Slidable(
       endActionPane: ActionPane(motion: const StretchMotion(), children: [
+        SlidableAction(
+          onPressed: ((context) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: ((context) {
+                  return EditTransaction(obj: transaction);
+                }),
+              ),
+            );
+          }),
+          icon: Icons.edit,
+          foregroundColor: const Color(0xFF2E49FB),
+        ),
         SlidableAction(
           onPressed: ((context) async {
             await TransactionDB().deleteTransaction(transaction);
@@ -47,7 +62,7 @@ class SlidebleTransaction extends StatelessWidget {
             style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
           ),
           trailing: Text(
-            transaction.amount,
+            '₹ ${transaction.amount}',
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 19,

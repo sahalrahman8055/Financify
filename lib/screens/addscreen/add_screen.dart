@@ -130,7 +130,7 @@ class _AddScreenState extends State<AddScreen> {
                 lastDate: DateTime(2100));
             if (newDate == null) return;
             setState(() {
-              date = newDate!;
+              date = newDate;
             });
           },
           child: Text(
@@ -333,7 +333,7 @@ class _AddScreenState extends State<AddScreen> {
           textAlign: TextAlign.center,
         ),
         duration: Duration(seconds: 3),
-        backgroundColor: Color(0xff368983),
+        backgroundColor: Colors.black,
       ),
     );
   }

@@ -1,20 +1,34 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
+import 'package:financify/db_functions/transaction_db.dart';
+import 'package:financify/screens/addscreen/add_screen.dart';
 import 'package:financify/screens/transaction/widgets/all_transaction.dart';
 import 'package:financify/screens/transaction/widgets/expense_transaction.dart';
 import 'package:financify/screens/transaction/widgets/income_transaction.dart';
 import 'package:financify/widget/bottomnavigationbar.dart';
+import 'package:financify/widget/searchfield.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-class TransactionList extends StatelessWidget {
+class TransactionList extends StatefulWidget {
   TransactionList({
     super.key,
   });
 
+  @override
+  State<TransactionList> createState() => _TransactionListState();
+}
+
+class _TransactionListState extends State<TransactionList> {
   TextEditingController searchController = TextEditingController();
 
   @override
+  void initState() {
+    overViewListNotifier.value =
+        TransactionDB.instance.transactionListNotifier.value;
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return SafeArea(
@@ -33,13 +47,11 @@ class TransactionList extends StatelessWidget {
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ))),
-          actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.search))
-          ],
         ),
         body: Container(
           child: Column(
             children: [
+              SearchField(),
               SizedBox(
                 height: size.height * 0.03,
               ),

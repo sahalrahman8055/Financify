@@ -192,14 +192,14 @@ Widget _head() {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "good afternoon",
+                        "Make your money safe",
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
                             color: Colors.grey),
                       ),
                       Text(
-                        "good afternoon",
+                        " ' Track it ' ",
                         style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 20,
