@@ -1,5 +1,6 @@
 import 'package:financify/db_functions/transaction_db.dart';
 import 'package:financify/screens/addscreen/add_screen.dart';
+import 'package:financify/screens/transaction/transactions_screen.dart';
 import 'package:flutter/material.dart';
 
 class SearchField extends StatefulWidget {
@@ -11,6 +12,7 @@ class SearchField extends StatefulWidget {
 
 class _SearchFieldState extends State<SearchField> {
   TextEditingController searchQueryController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -65,6 +67,8 @@ class _SearchFieldState extends State<SearchField> {
               element.name.toLowerCase().contains(query.trim().toLowerCase()) ||
               element.explain.contains(query.trim().toLowerCase()))
           .toList();
+
+      //TransactionDB().transactionListNotifier.notifyListeners();
     }
   }
 }

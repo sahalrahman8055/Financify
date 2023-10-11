@@ -4,8 +4,7 @@ import 'package:financify/screens/addscreen/widgets/background_container.dart';
 import 'package:flutter/material.dart';
 import '../../widget/bottomnavigationbar.dart';
 
-ValueNotifier<List<Add_data>> overViewListNotifier =
-    ValueNotifier(TransactionDB.instance.transactionListNotifier.value);
+
 
 class AddScreen extends StatefulWidget {
   const AddScreen({super.key});

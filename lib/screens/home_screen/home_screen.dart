@@ -2,6 +2,7 @@ import 'package:financify/db_functions/income_expenses.dart';
 import 'package:financify/db_functions/transaction_db.dart';
 import 'package:financify/model/add_data.dart';
 import 'package:financify/screens/transaction/transaction_lists.dart';
+import 'package:financify/screens/transaction/transactions_screen.dart';
 import 'package:financify/widget/uppercase.dart';
 
 import 'package:flutter/material.dart';
@@ -54,7 +55,7 @@ class _home_screenState extends State<home_screen> {
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => TransactionList()));
+                            builder: (context) => Transactions()));
                       },
                       child: const Text('See all',
                           style: TextStyle(

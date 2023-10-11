@@ -30,7 +30,7 @@ class SlidebleTransaction extends StatelessWidget {
         ),
         SlidableAction(
           onPressed: ((context) async {
-            await TransactionDB().deleteTransaction(transaction);
+             TransactionDB().deleteTransaction(transaction);
           }),
           icon: Icons.delete,
           foregroundColor: Colors.red,

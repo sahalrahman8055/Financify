@@ -1,14 +1,16 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:financify/db_functions/transaction_db.dart';
+import 'package:financify/filter/type_filter.dart';
 import 'package:financify/screens/addscreen/add_screen.dart';
-import 'package:financify/screens/transaction/widgets/all_transaction.dart';
-import 'package:financify/screens/transaction/widgets/expense_transaction.dart';
-import 'package:financify/screens/transaction/widgets/income_transaction.dart';
+import 'package:financify/screens/transaction/transactions_screen.dart';
+
 import 'package:financify/widget/bottomnavigationbar.dart';
 import 'package:financify/widget/searchfield.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+
+ValueNotifier showCategory = ValueNotifier('All');
 
 class TransactionList extends StatefulWidget {
   TransactionList({
@@ -20,8 +22,6 @@ class TransactionList extends StatefulWidget {
 }
 
 class _TransactionListState extends State<TransactionList> {
-  TextEditingController searchController = TextEditingController();
-
   @override
   void initState() {
     overViewListNotifier.value =
@@ -34,6 +34,12 @@ class _TransactionListState extends State<TransactionList> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          actions: const [
+            TypeFilterClass(),
+            SizedBox(
+              width: 20,
+            ),
+          ],
           backgroundColor: Colors.black,
           leading: GestureDetector(
               onTap: () {
@@ -51,40 +57,10 @@ class _TransactionListState extends State<TransactionList> {
         body: Container(
           child: Column(
             children: [
-              SearchField(),
-              SizedBox(
-                height: size.height * 0.03,
-              ),
+              SearchField(), 
               Expanded(
-                  child: DefaultTabController(
-                      length: 3,
-                      initialIndex: 0,
-                      child: Column(
-                        children: <Widget>[
-                          ButtonsTabBar(
-                              backgroundColor: Colors.black,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: size.width * 0.1),
-                              tabs: const [
-                                Tab(
-                                  iconMargin: EdgeInsets.all(30),
-                                  text: 'All',
-                                ),
-                                Tab(
-                                  text: "Income",
-                                ),
-                                Tab(
-                                  text: "Expense",
-                                ),
-                              ]),
-                          Expanded(
-                              child: TabBarView(children: [
-                            AllTransaction(),
-                            IncomeTransaction(),
-                            ExpenseTransaction()
-                          ]))
-                        ],
-                      )))
+                child: Transactions(),
+              )
             ],
           ),
         ),
