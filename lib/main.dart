@@ -1,5 +1,6 @@
 import 'package:financify/db_functions/transaction_db.dart';
 import 'package:financify/model/add_data.dart';
+import 'package:financify/screens/start_screen/Splash.dart';
 import 'package:financify/widget/bottomnavigationbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -24,6 +25,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: BottomBar());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: StartScreen());
   }
 }

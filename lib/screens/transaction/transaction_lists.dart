@@ -1,12 +1,12 @@
-import 'package:buttons_tabbar/buttons_tabbar.dart';
+
 import 'package:financify/db_functions/transaction_db.dart';
 import 'package:financify/filter/type_filter.dart';
-import 'package:financify/screens/addscreen/add_screen.dart';
+
 import 'package:financify/screens/transaction/transactions_screen.dart';
 
 import 'package:financify/widget/bottomnavigationbar.dart';
 import 'package:financify/widget/searchfield.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; 
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -30,7 +30,7 @@ class _TransactionListState extends State<TransactionList> {
   }
 
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    // final Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(

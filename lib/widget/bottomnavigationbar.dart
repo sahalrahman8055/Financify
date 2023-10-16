@@ -1,5 +1,5 @@
 import 'package:financify/screens/settings/settings.dart';
-import 'package:financify/screens/statistics/Statistics.dart';
+import 'package:financify/screens/statistics/Statistics_screen.dart';
 import 'package:financify/screens/addscreen/add_screen.dart';
 import 'package:financify/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class _Bottom_BarState extends State<BottomBar> {
   int index_color = 0;
   List Screen = [
     home_screen(),
-    Statistics(),
+    StatisticsScreen(),
     TransactionList(),
     settings(),
   ];

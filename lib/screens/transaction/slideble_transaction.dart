@@ -42,7 +42,7 @@ class SlidebleTransaction extends StatelessWidget {
         shape: RoundedRectangleBorder(
           //<-- SEE HERE
           // side: BorderSide(width: 1),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20), 
         ),
         child: ListTile(
           leading: ClipRRect(
@@ -57,7 +57,7 @@ class SlidebleTransaction extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          subtitle: Text(
+          subtitle: Text( 
             '${transaction.datetime.year}-${transaction.datetime.day}-${transaction.datetime.month}  ${days[transaction.datetime.weekday - 1]}',
             style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
           ),

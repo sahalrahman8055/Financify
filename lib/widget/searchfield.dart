@@ -1,5 +1,5 @@
 import 'package:financify/db_functions/transaction_db.dart';
-import 'package:financify/screens/addscreen/add_screen.dart';
+
 import 'package:financify/screens/transaction/transactions_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -27,16 +27,13 @@ class _SearchFieldState extends State<SearchField> {
           child: TextField(
             controller: searchQueryController,
             onChanged: (query) {
-              //print('$query');
               searchResult(query);
-              // overViewListNotifier.notifyListeners();
             },
             decoration: InputDecoration(
                 hintText: 'Search..',
                 border: InputBorder.none,
                 icon: const Icon(
                   Icons.search,
-                  // color: textClr,
                 ),
                 suffixIcon: IconButton(
                     onPressed: () {
@@ -46,7 +43,6 @@ class _SearchFieldState extends State<SearchField> {
                     },
                     icon: const Icon(
                       Icons.close,
-                      // color: Colors.black,
                     ))),
           ),
         ),
@@ -55,7 +51,6 @@ class _SearchFieldState extends State<SearchField> {
   }
 
   searchResult(String query) {
-    //debugPrint('queryprinted  $query');
     if (query.isEmpty || query == '') {
       debugPrint(query);
 
@@ -65,10 +60,10 @@ class _SearchFieldState extends State<SearchField> {
       overViewListNotifier.value = overViewListNotifier.value
           .where((element) =>
               element.name.toLowerCase().contains(query.trim().toLowerCase()) ||
-              element.explain.contains(query.trim().toLowerCase()))
+              element.explain.contains(query.trim().toLowerCase())
+              || element.amount.contains(query.trim())
+              )
           .toList();
-
-      //TransactionDB().transactionListNotifier.notifyListeners();
     }
   }
 }
