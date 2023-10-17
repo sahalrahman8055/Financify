@@ -1,4 +1,3 @@
-
 import 'package:financify/db_functions/transaction_db.dart';
 import 'package:financify/filter/type_filter.dart';
 
@@ -6,7 +5,7 @@ import 'package:financify/screens/transaction/transactions_screen.dart';
 
 import 'package:financify/widget/bottomnavigationbar.dart';
 import 'package:financify/widget/searchfield.dart';
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -50,14 +49,14 @@ class _TransactionListState extends State<TransactionList> {
           title: Center(
               child: Text('Transaction History',
                   style: GoogleFonts.ubuntu(
-                    fontSize: 18,
+                    fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ))),
         ),
         body: Container(
           child: Column(
             children: [
-              SearchField(), 
+              SearchField(),
               Expanded(
                 child: Transactions(),
               )

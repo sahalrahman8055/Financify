@@ -9,7 +9,7 @@ const transactionDBName = 'Transaction_database';
 class TransactionDB extends ChangeNotifier {
   // there is no return type 
   TransactionDB.internal(); 
-
+////?????
   static TransactionDB instance = TransactionDB.internal();
 
   factory TransactionDB() {
@@ -30,7 +30,7 @@ class TransactionDB extends ChangeNotifier {
     final transactionDB = await Hive.openBox<Add_data>(transactionDBName);
     await transactionDB.put(obj.id, obj);
     getAllTransactions();
-  }
+  }// add vs put crud 
 
   Future<void> deleteTransaction(Add_data transactionModel) async {
     final transactionDB = await Hive.openBox<Add_data>(transactionDBName);
@@ -41,7 +41,7 @@ class TransactionDB extends ChangeNotifier {
 
   Future<void> editTransaction(Add_data value) async {
     final transactionDB = await Hive.openBox<Add_data>(transactionDBName);
-    transactionDB.put(value.id, value);
+    transactionDB.put(value.id, value);//??
     overViewListNotifier.notifyListeners();
     getAllTransactions();
   }

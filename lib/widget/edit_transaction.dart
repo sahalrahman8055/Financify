@@ -44,8 +44,6 @@ class _EditTransactionState extends State<EditTransaction> {
   @override
   void initState() {
     super.initState();
-
-    super.initState();
     _value = int.parse(widget.obj.id);
     _amountTextEditingController =
         TextEditingController(text: widget.obj.amount);
@@ -54,7 +52,7 @@ class _EditTransactionState extends State<EditTransaction> {
     _selectedDateTime = widget.obj.datetime;
     _selectedtype = widget.obj.type;
     _selectedCategory = widget.obj.name;
-  }
+  } ///??
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +64,7 @@ class _EditTransactionState extends State<EditTransaction> {
         children: [
           backgroundContainer(context),
           SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
             child: Container(
               child: mainContainer(),
             ),

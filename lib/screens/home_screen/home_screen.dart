@@ -1,8 +1,8 @@
 import 'package:financify/db_functions/income_expenses.dart';
 import 'package:financify/db_functions/transaction_db.dart';
 import 'package:financify/model/add_data.dart';
+import 'package:financify/screens/transaction/transaction_lists.dart';
 
-import 'package:financify/screens/transaction/transactions_screen.dart';
 import 'package:financify/widget/uppercase.dart';
 
 import 'package:flutter/material.dart';
@@ -55,7 +55,7 @@ class _home_screenState extends State<home_screen> {
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => Transactions()));
+                            builder: (context) => TransactionList()));
                       },
                       child: const Text('See all',
                           style: TextStyle(
@@ -79,12 +79,6 @@ class _home_screenState extends State<home_screen> {
                             ? Column(
                                 children: [
                                   SizedBox(height: screenHeight / 14),
-                                  Center(
-                                      // child: Image.asset(
-                                      //   "photos/Empty Box.png",
-                                      //   fit: BoxFit.fill,
-                                      // ),
-                                      ),
                                   const Center(
                                     child: Text('No transactions added yet'),
                                   ),
@@ -162,7 +156,7 @@ Widget _head() {
           Container(
             width: double.infinity,
             height: 240,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               // color: Colors.greenAccent,
               color: Colors.black,
               borderRadius: BorderRadius.only(
@@ -179,16 +173,16 @@ Widget _head() {
                     child: Container(
                         height: 35,
                         width: 35,
-                        color: Color.fromRGBO(250, 250, 250, 0.2),
-                        child: Icon(
+                        color: const Color.fromRGBO(250, 250, 250, 0.2),
+                        child: const Icon(
                           Icons.notification_add_outlined,
                           size: 25,
                           color: Colors.white,
                         )),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 30, left: 10),
+                const Padding(
+                  padding: EdgeInsets.only(top: 30, left: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -216,7 +210,7 @@ Widget _head() {
       ),
       Center(
         child: Padding(
-          padding: EdgeInsets.only(top: 120),
+          padding: const EdgeInsets.only(top: 120),
           child: Container(
             height: 160,
             width: 330,
@@ -230,18 +224,18 @@ Widget _head() {
                       .withOpacity(0.5), // You can customize the shadow color
                   spreadRadius: 5, // Adjust the spread radius for the shadow
                   blurRadius: 7, // Adjust the blur radius for the shadow
-                  offset:
-                      Offset(0, 3), // Offset of the shadow from the container
+                  offset: const Offset(
+                      0, 3), // Offset of the shadow from the container
                 ),
               ],
             ),
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -260,14 +254,14 @@ Widget _head() {
                     ],
                   ),
                 ),
-                SizedBox(height: 7),
+                const SizedBox(height: 7),
                 Padding(
                   padding: const EdgeInsets.only(left: 15),
                   child: Row(
                     children: [
                       Text(
-                        '\₹ ${IncomeAndExpence().total()}',
-                        style: TextStyle(
+                        '₹ ${IncomeAndExpence().total()}',
+                        style: const TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 20,
                           color: Colors.black,
@@ -276,9 +270,9 @@ Widget _head() {
                     ],
                   ),
                 ),
-                SizedBox(height: 25),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                const SizedBox(height: 25),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -333,7 +327,7 @@ Widget _head() {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 7,
                 ),
                 Padding(
@@ -342,16 +336,16 @@ Widget _head() {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '\₹ ${IncomeAndExpence().income()}',
-                        style: TextStyle(
+                        '₹ ${IncomeAndExpence().income()}',
+                        style: const TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
                           color: Colors.black,
                         ),
                       ),
                       Text(
-                        '\₹ ${IncomeAndExpence().expense()}',
-                        style: TextStyle(
+                        '₹ ${IncomeAndExpence().expense()}',
+                        style: const TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
                           color: Colors.black,

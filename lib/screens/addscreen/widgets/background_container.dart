@@ -12,14 +12,14 @@ class BackgroundContainer extends StatelessWidget {
         Container(
           width: double.infinity,
           height: 240,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               color: Colors.white30,
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(20),
                   bottomRight: Radius.circular(20))),
           child: Column(
             children: [
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Row(
@@ -30,18 +30,18 @@ class BackgroundContainer extends StatelessWidget {
                         onTap: () {
                           Navigator.of(context).pop();
                         },
-                        child: Icon(
+                        child: const Icon(
                           Icons.arrow_back_rounded,
                           color: Colors.white,
                         )),
-                    Text(
+                    const Text(
                       "Adding",
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                           color: Colors.white),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.attach_file_outlined,
                       color: Colors.white,
                     )

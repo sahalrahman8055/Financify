@@ -1,4 +1,4 @@
-import 'package:financify/screens/settings/settings.dart';
+import 'package:financify/screens/settings/settings_Screen.dart';
 import 'package:financify/screens/statistics/Statistics_screen.dart';
 import 'package:financify/screens/addscreen/add_screen.dart';
 import 'package:financify/screens/home_screen/home_screen.dart';
@@ -16,10 +16,10 @@ class BottomBar extends StatefulWidget {
 class _Bottom_BarState extends State<BottomBar> {
   int index_color = 0;
   List Screen = [
-    home_screen(),
-    StatisticsScreen(),
+    const home_screen(),
+    const StatisticsScreen(),
     TransactionList(),
-    settings(),
+    const settings(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -28,16 +28,16 @@ class _Bottom_BarState extends State<BottomBar> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => AddScreen()));
+              .push(MaterialPageRoute(builder: (context) => const AddScreen()));
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         backgroundColor: Colors.black,
         elevation:
             10, // Adjust the elevation value to control the shadow's depth
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         child: Padding(
           padding: const EdgeInsets.only(top: 8, bottom: 8),
           child: Row(
@@ -67,7 +67,7 @@ class _Bottom_BarState extends State<BottomBar> {
                   color: index_color == 1 ? Colors.black : Colors.grey,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               GestureDetector(

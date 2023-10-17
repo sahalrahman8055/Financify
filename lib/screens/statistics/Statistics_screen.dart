@@ -6,6 +6,7 @@ import 'package:financify/screens/statistics/statistics_all.dart';
 import 'package:financify/screens/statistics/statistics_expense.dart';
 import 'package:financify/screens/statistics/statistics_income.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ValueNotifier<List<Add_data>> overViewGraphNotifier =
     ValueNotifier(TransactionDB.instance.transactionListNotifier.value);
@@ -32,13 +33,13 @@ class _TransactionInsightsAllState extends State<StatisticsScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 246, 245, 245),
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.black,
-        title: const Center(
-          child: Text(
-            "Statistics",
-            style: TextStyle(fontSize: 25),
-          ),
-        ),
+        title: Text("Statistics",
+            style: GoogleFonts.ubuntu(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            )),
       ),
       body: Column(
         children: [

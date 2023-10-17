@@ -1,5 +1,12 @@
+import 'package:financify/db_functions/transaction_db.dart';
+import 'package:financify/model/add_data.dart';
+import 'package:financify/screens/settings/Terms&Conditions.dart';
+import 'package:financify/screens/settings/about.dart';
+import 'package:financify/screens/start_screen/FIrstscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class settings extends StatelessWidget {
   const settings({super.key});
@@ -8,13 +15,12 @@ class settings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text('settings',
-              style: GoogleFonts.ubuntu(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              )),
-        ),
+        centerTitle: true,
+        title: Text('settings',
+            style: GoogleFonts.ubuntu(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            )),
         backgroundColor: Colors.black,
       ),
       body: SafeArea(
@@ -22,13 +28,18 @@ class settings extends StatelessWidget {
         padding: const EdgeInsets.only(left: 20),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => About()),
+                );
+              },
               child: Container(
-                child: Row(
+                child: const Row(
                   children: [
                     Icon(
                       Icons.warning_amber_outlined,
@@ -45,13 +56,15 @@ class settings extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                resetApp(context);
+              },
               child: Container(
-                child: Row(
+                child: const Row(
                   children: [
                     Icon(
                       Icons.restore,
@@ -68,13 +81,13 @@ class settings extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             GestureDetector(
               onTap: () {},
               child: Container(
-                child: Row(
+                child: const Row(
                   children: [
                     Icon(
                       Icons.policy,
@@ -91,13 +104,16 @@ class settings extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Terms()));
+              },
               child: Container(
-                child: Row(
+                child: const Row(
                   children: [
                     Icon(
                       Icons.note_add,
@@ -114,13 +130,13 @@ class settings extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             GestureDetector(
               onTap: () {},
               child: Container(
-                child: Row(
+                child: const Row(
                   children: [
                     Icon(
                       Icons.share,
@@ -137,12 +153,71 @@ class settings extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
           ],
         ),
       )),
     );
+  }
+
+  resetApp(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (ctx) {
+          return AlertDialog(
+            content: const Text(
+              'Do you want to Reset the app?',
+              style: TextStyle(color: Colors.black, fontSize: 18),
+            ),
+            actions: [
+              TextButton(
+                  onPressed: (() async {
+                    Navigator.of(context).pop();
+
+                    // final categoryDB =
+                    //     await Hive.openBox<CategoryModel>(categoryDBName);
+
+                    // categoryDB.clear();
+
+                    final transactionDb =
+                        await Hive.openBox<Add_data>(transactionDBName);
+
+                    transactionDb.clear();
+
+                    TransactionDB().transactionListNotifier.value.clear();
+                    TransactionDB().transactionListNotifier.notifyListeners();
+
+                    // ignore: use_build_context_synchronously
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const StartScreen(),
+                      ),
+                    );
+
+                    // CategoryDB().categoryNotifier.notifyListeners();
+                    SharedPreferences pref =
+                        await SharedPreferences.getInstance();
+                    await pref.clear();
+                  }),
+                  child: const Text(
+                    'Yes',
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  )),
+              TextButton(
+                onPressed: (() {
+                  Navigator.of(context).pop();
+                }),
+                child: const Text(
+                  'No',
+                  style: TextStyle(color: Colors.green),
+                ),
+              ),
+            ],
+          );
+        });
   }
 }
