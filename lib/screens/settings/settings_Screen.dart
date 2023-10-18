@@ -1,8 +1,9 @@
 import 'package:financify/db_functions/transaction_db.dart';
 import 'package:financify/model/add_data.dart';
+import 'package:financify/screens/settings/Privacy_Policy.dart';
 import 'package:financify/screens/settings/Terms&Conditions.dart';
 import 'package:financify/screens/settings/about.dart';
-import 'package:financify/screens/start_screen/FIrstscreen.dart';
+import 'package:financify/screens/start_screen/Splash.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
@@ -85,7 +86,10 @@ class settings extends StatelessWidget {
               height: 30,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PrivacyPolicy()));
+              },
               child: Container(
                 child: const Row(
                   children: [
@@ -134,7 +138,10 @@ class settings extends StatelessWidget {
               height: 30,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                // Share.share(
+                //       'Hey! check out this new app......https://play.google.com/store/apps/details?id=in.brototype.spendee');
+              },
               child: Container(
                 child: const Row(
                   children: [
@@ -192,7 +199,7 @@ class settings extends StatelessWidget {
                     // ignore: use_build_context_synchronously
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => const StartScreen(),
+                        builder: (context) => const SplashScreen(),
                       ),
                     );
 

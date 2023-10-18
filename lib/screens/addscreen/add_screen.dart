@@ -45,7 +45,7 @@ class _AddScreenState extends State<AddScreen> {
           child: Stack(
         alignment: Alignment.center,
         children: [
-          BackgroundContainer(),
+          const BackgroundContainer(),
           Positioned(
             top: 120,
             child: SingleChildScrollView(child: main_container()),
@@ -67,19 +67,19 @@ class _AddScreenState extends State<AddScreen> {
         key: _formKey,
         child: Column(
           children: [
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             name(),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             explain(),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             amount(),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             type(),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             date_time(),
-            Spacer(),
+            const Spacer(),
             save(),
-            SizedBox(
+            const SizedBox(
               height: 20,
             )
           ],
@@ -101,7 +101,7 @@ class _AddScreenState extends State<AddScreen> {
             borderRadius: BorderRadius.circular(15), color: Colors.black),
         width: 120,
         height: 50,
-        child: Text(
+        child: const Text(
           'Save',
           style: TextStyle(
               fontFamily: 'f',
@@ -134,7 +134,7 @@ class _AddScreenState extends State<AddScreen> {
           },
           child: Text(
             'Date :  ${date.year} /${date.month} /${date.day}',
-            style: TextStyle(fontSize: 17, color: Colors.black),
+            style: const TextStyle(fontSize: 17, color: Colors.black),
           )),
     );
   }
@@ -143,7 +143,7 @@ class _AddScreenState extends State<AddScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(width: 2, color: Colors.black54),
@@ -162,7 +162,7 @@ class _AddScreenState extends State<AddScreen> {
                         children: [
                           Text(
                             e,
-                            style: TextStyle(fontSize: 18),
+                            style: const TextStyle(fontSize: 18),
                           )
                         ],
                       ),
@@ -177,8 +177,8 @@ class _AddScreenState extends State<AddScreen> {
                     ],
                   ))
               .toList(),
-          hint: Padding(
-            padding: const EdgeInsets.only(top: 12),
+          hint: const Padding(
+            padding: EdgeInsets.only(top: 12),
             child: Text(
               "type",
               style: TextStyle(color: Colors.grey),
@@ -200,15 +200,15 @@ class _AddScreenState extends State<AddScreen> {
         focusNode: amount_,
         controller: amountController,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           labelText: 'amount',
           labelStyle: TextStyle(fontSize: 17, color: Colors.grey.shade500),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 2, color: Colors.black54)),
+              borderSide: const BorderSide(width: 2, color: Colors.black54)),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 2, color: Colors.black)),
+              borderSide: const BorderSide(width: 2, color: Colors.black)),
         ),
       ),
     );
@@ -221,15 +221,15 @@ class _AddScreenState extends State<AddScreen> {
         focusNode: ex,
         controller: explainController,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           labelText: 'explain',
           labelStyle: TextStyle(fontSize: 17, color: Colors.grey.shade500),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 2, color: Colors.black54)),
+              borderSide: const BorderSide(width: 2, color: Colors.black54)),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(width: 2, color: Colors.black)),
+              borderSide: const BorderSide(width: 2, color: Colors.black)),
         ),
         validator: (value) {
           if (value == null || value.isEmpty) {
@@ -246,13 +246,13 @@ class _AddScreenState extends State<AddScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         width: 300,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
             width: 2,
-            color: Color(0xffC5C5C5),
+            color: const Color(0xffC5C5C5),
           ),
         ),
         child: DropdownButton<String>(
@@ -272,10 +272,10 @@ class _AddScreenState extends State<AddScreen> {
                             width: 40,
                             child: Image.asset('assets/images/${e}.png'),
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           Text(
                             e,
-                            style: TextStyle(fontSize: 18),
+                            style: const TextStyle(fontSize: 18),
                           )
                         ],
                       ),
@@ -290,13 +290,13 @@ class _AddScreenState extends State<AddScreen> {
                         width: 42,
                         child: Image.asset('assets/images/${e}.png'),
                       ),
-                      SizedBox(width: 5),
+                      const SizedBox(width: 5),
                       Text(e)
                     ],
                   ))
               .toList(),
-          hint: Padding(
-            padding: const EdgeInsets.only(top: 12),
+          hint: const Padding(
+            padding: EdgeInsets.only(top: 12),
             child: Text(
               'Name',
               style: TextStyle(color: Colors.grey),
@@ -322,7 +322,7 @@ class _AddScreenState extends State<AddScreen> {
     await TransactionDB().addTransaction(model);
 
     Navigator.of(context).pushReplacement(MaterialPageRoute(
-      builder: (context) => BottomBar(),
+      builder: (context) => const BottomBar(),
     ));
     TransactionDB.instance.getAllTransactions();
     ScaffoldMessenger.of(context).showSnackBar(
@@ -332,7 +332,7 @@ class _AddScreenState extends State<AddScreen> {
           textAlign: TextAlign.center,
         ),
         duration: Duration(seconds: 3),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.green,
       ),
     );
   }

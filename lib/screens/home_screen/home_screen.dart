@@ -2,9 +2,7 @@ import 'package:financify/db_functions/income_expenses.dart';
 import 'package:financify/db_functions/transaction_db.dart';
 import 'package:financify/model/add_data.dart';
 import 'package:financify/screens/transaction/transaction_lists.dart';
-
 import 'package:financify/widget/uppercase.dart';
-
 import 'package:flutter/material.dart';
 
 class home_screen extends StatefulWidget {

@@ -36,7 +36,7 @@ class _StartScreenState extends State<StartScreen> {
                   'Financify',
                   style: GoogleFonts.spaceGrotesk(
                     textStyle: TextStyle(
-                      color: Colors.white,
+                      color: Color.fromARGB(255, 31, 247, 175),
                       fontSize: 35,
                       fontWeight: FontWeight.w800,
                       shadows: [
@@ -67,8 +67,8 @@ class _StartScreenState extends State<StartScreen> {
                       MaterialPageRoute(builder: (context) => LoginScreen()));
                 },
                 decoration: NeoPopTiltedButtonDecoration(
-                  color: Colors.white60,
-                  plunkColor: Colors.white60,
+                  color: Color.fromARGB(255, 31, 247, 175),
+                  plunkColor: Color.fromARGB(255, 31, 247, 175),
                   shadowColor: Colors.grey,
                   showShimmer: true,
                 ),

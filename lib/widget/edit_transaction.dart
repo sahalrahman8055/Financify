@@ -117,7 +117,7 @@ class _EditTransactionState extends State<EditTransaction> {
                   submitEditIncomeTransaction();
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                        backgroundColor: Colors.black,
+                        backgroundColor: Colors.green,
                         content: Center(
                             child: Text('Transaction Edited Successfully'))),
                   );

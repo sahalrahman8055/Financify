@@ -29,9 +29,43 @@ class SlidebleTransaction extends StatelessWidget {
           foregroundColor: const Color(0xFF2E49FB),
         ),
         SlidableAction(
-          onPressed: ((context) async {
-             TransactionDB().deleteTransaction(transaction);
-          }),
+          // onPressed: ((context) async {
+          //    TransactionDB().deleteTransaction(transaction);
+          // }),
+          onPressed: (_) {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text('Delete Transaction'),
+                content: const Text(
+                    'Are you sure you want to delete this transaction?'),
+                actions: [
+                  //CANCEL BUTTON
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text(
+                      "Cancel",
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
+
+                  //DELETE BUTTON
+                  TextButton(
+                      onPressed: () async {
+                        //post delete
+                        TransactionDB().deleteTransaction(transaction);
+
+                        //dismiss the dialoge
+                        Navigator.pop(context);
+                      },
+                      child: const Text(
+                        "Delete",
+                        style: TextStyle(color: Colors.red),
+                      ))
+                ],
+              ),
+            );
+          },
           icon: Icons.delete,
           foregroundColor: Colors.red,
         ),
@@ -42,7 +76,7 @@ class SlidebleTransaction extends StatelessWidget {
         shape: RoundedRectangleBorder(
           //<-- SEE HERE
           // side: BorderSide(width: 1),
-          borderRadius: BorderRadius.circular(20), 
+          borderRadius: BorderRadius.circular(20),
         ),
         child: ListTile(
           leading: ClipRRect(
@@ -57,7 +91,7 @@ class SlidebleTransaction extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          subtitle: Text( 
+          subtitle: Text(
             '${transaction.datetime.year}-${transaction.datetime.day}-${transaction.datetime.month}  ${days[transaction.datetime.weekday - 1]}',
             style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
           ),
