@@ -95,7 +95,7 @@ class _home_screenState extends State<home_screen> {
                                     child: ListTile(
                                       leading: CircleAvatar(
                                         backgroundColor: Colors.transparent,
-                                        radius: 50,
+                                        radius: 50,  
                                         child: Image.asset(
                                             'assets/images/${value.name}.png',
                                             height: 40),

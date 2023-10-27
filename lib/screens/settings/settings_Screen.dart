@@ -3,6 +3,7 @@ import 'package:financify/model/add_data.dart';
 import 'package:financify/screens/settings/Privacy_Policy.dart';
 import 'package:financify/screens/settings/Terms&Conditions.dart';
 import 'package:financify/screens/settings/about.dart';
+import 'package:financify/screens/start_screen/Login.dart';
 import 'package:financify/screens/start_screen/Splash.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -63,6 +64,7 @@ class settings extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 resetApp(context);
+                usernameController.clear();
               },
               child: Container(
                 child: const Row(

@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:neopop/widgets/buttons/neopop_tilted_button/neopop_tilted_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final _usernameController = TextEditingController();
+final usernameController = TextEditingController();
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -15,6 +15,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -75,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         }
                       },
-                      controller: _usernameController,
+                      controller: usernameController,
                       decoration: InputDecoration(
                         hintText: 'Username..',
                         hintStyle: TextStyle(
@@ -142,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void checkLogin(BuildContext ctx) async {
-    final username = _usernameController.text;
+    final username = usernameController.text;
 
     final sharedPref = await SharedPreferences.getInstance();
     await sharedPref.setBool(saveKeyName, true);

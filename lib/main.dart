@@ -1,11 +1,10 @@
 import 'package:financify/db_functions/transaction_db.dart';
 import 'package:financify/model/add_data.dart';
-import 'package:financify/screens/start_screen/FIrstscreen.dart';
+
 import 'package:financify/screens/start_screen/Splash.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
 
 const saveKeyName = 'User logged in';
 
