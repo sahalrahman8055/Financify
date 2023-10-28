@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "financify" "\0"
+            VALUE "FileDescription", "Financify" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "financify" "\0"
+            VALUE "InternalName", "Financify" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "financify.exe" "\0"
-            VALUE "ProductName", "financify" "\0"
+            VALUE "OriginalFilename", "Financify.exe" "\0"
+            VALUE "ProductName", "Financify" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

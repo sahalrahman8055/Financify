@@ -1,7 +1,7 @@
-import 'package:financify/main.dart';
-import 'package:financify/screens/start_screen/FIrstscreen.dart';
-import 'package:financify/screens/start_screen/Login.dart';
-import 'package:financify/widget/bottomnavigationbar.dart';
+import 'package:Financify/main.dart';
+import 'package:Financify/screens/start_screen/FIrstscreen.dart';
+import 'package:Financify/screens/start_screen/Login.dart';
+import 'package:Financify/widget/bottomnavigationbar.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

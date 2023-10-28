@@ -1,10 +1,10 @@
-import 'package:financify/db_functions/transaction_db.dart';
-import 'package:financify/filter/type_filter.dart';
+import 'package:Financify/db_functions/transaction_db.dart';
+import 'package:Financify/filter/type_filter.dart';
 
-import 'package:financify/screens/transaction/transactions_screen.dart';
+import 'package:Financify/screens/transaction/transactions_screen.dart';
 
-import 'package:financify/widget/bottomnavigationbar.dart';
-import 'package:financify/widget/searchfield.dart';
+import 'package:Financify/widget/bottomnavigationbar.dart';
+import 'package:Financify/widget/searchfield.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';

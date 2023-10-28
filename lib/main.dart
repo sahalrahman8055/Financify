@@ -1,7 +1,7 @@
-import 'package:financify/db_functions/transaction_db.dart';
-import 'package:financify/model/add_data.dart';
+import 'package:Financify/db_functions/transaction_db.dart';
+import 'package:Financify/model/add_data.dart';
 
-import 'package:financify/screens/start_screen/Splash.dart';
+import 'package:Financify/screens/start_screen/Splash.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -28,6 +28,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: SplashScreen());
+    return const MaterialApp(debugShowCheckedModeBanner: false, home: SplashScreen());
   }
 }

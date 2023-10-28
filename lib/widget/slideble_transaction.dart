@@ -1,7 +1,7 @@
-import 'package:financify/db_functions/transaction_db.dart';
-import 'package:financify/model/add_data.dart';
-import 'package:financify/widget/edit_transaction.dart';
-import 'package:financify/widget/uppercase.dart';
+import 'package:Financify/db_functions/transaction_db.dart';
+import 'package:Financify/model/add_data.dart';
+import 'package:Financify/widget/edit_transaction.dart';
+import 'package:Financify/widget/uppercase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 

@@ -1,7 +1,7 @@
-import 'package:financify/screens/settings/settings_Screen.dart';
-import 'package:financify/screens/statistics/Statistics_screen.dart';
-import 'package:financify/screens/addscreen/add_screen.dart';
-import 'package:financify/screens/home_screen/home_screen.dart';
+import 'package:Financify/screens/settings/settings_Screen.dart';
+import 'package:Financify/screens/statistics/Statistics_screen.dart';
+import 'package:Financify/screens/addscreen/add_screen.dart';
+import 'package:Financify/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/transaction/transaction_lists.dart';
@@ -19,7 +19,7 @@ class _Bottom_BarState extends State<BottomBar> {
     const home_screen(),
     const StatisticsScreen(),
     TransactionList(),
-    const settings(),
+    const Settings(),
   ];
   @override
   Widget build(BuildContext context) {

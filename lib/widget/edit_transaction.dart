@@ -1,5 +1,5 @@
-import 'package:financify/db_functions/transaction_db.dart';
-import 'package:financify/model/add_data.dart';
+import 'package:Financify/db_functions/transaction_db.dart';
+import 'package:Financify/model/add_data.dart';
 import 'package:flutter/material.dart';
 
 class EditTransaction extends StatefulWidget {
@@ -375,7 +375,7 @@ class _EditTransactionState extends State<EditTransaction> {
               .map(
                 (e) => Row(
                   children: [
-                    Container(
+                    SizedBox(
                       width: 42,
                       child: Image.asset('images/$e.png'),
                     ),

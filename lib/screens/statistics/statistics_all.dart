@@ -1,7 +1,7 @@
 
-import 'package:financify/db_functions/income_expenses.dart';
-import 'package:financify/db_functions/transaction_db.dart';
-import 'package:financify/model/add_data.dart';
+import 'package:Financify/db_functions/income_expenses.dart';
+import 'package:Financify/db_functions/transaction_db.dart';
+import 'package:Financify/model/add_data.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 

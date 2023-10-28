@@ -1,4 +1,4 @@
-import 'package:financify/screens/start_screen/Login.dart';
+import 'package:Financify/screens/start_screen/Login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:neopop/widgets/buttons/neopop_tilted_button/neopop_tilted_button.dart';

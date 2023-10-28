@@ -1,5 +1,5 @@
-import 'package:financify/main.dart';
-import 'package:financify/widget/bottomnavigationbar.dart';
+import 'package:Financify/main.dart';
+import 'package:Financify/widget/bottomnavigationbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:neopop/widgets/buttons/neopop_tilted_button/neopop_tilted_button.dart';

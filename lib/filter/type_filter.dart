@@ -1,5 +1,5 @@
 
-import 'package:financify/screens/transaction/transaction_lists.dart';
+import 'package:Financify/screens/transaction/transaction_lists.dart';
 import 'package:flutter/material.dart';
 
 class TypeFilterClass extends StatelessWidget {

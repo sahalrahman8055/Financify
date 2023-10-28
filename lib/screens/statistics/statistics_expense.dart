@@ -1,5 +1,5 @@
-import 'package:financify/model/add_data.dart';
-import 'package:financify/screens/statistics/statistics_all.dart';
+import 'package:Financify/model/add_data.dart';
+import 'package:Financify/screens/statistics/statistics_all.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 

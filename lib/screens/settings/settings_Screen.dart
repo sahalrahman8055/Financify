@@ -1,17 +1,17 @@
-import 'package:financify/db_functions/transaction_db.dart';
-import 'package:financify/model/add_data.dart';
-import 'package:financify/screens/settings/Privacy_Policy.dart';
-import 'package:financify/screens/settings/Terms&Conditions.dart';
-import 'package:financify/screens/settings/about.dart';
-import 'package:financify/screens/start_screen/Login.dart';
-import 'package:financify/screens/start_screen/Splash.dart';
+import 'package:Financify/db_functions/transaction_db.dart';
+import 'package:Financify/model/add_data.dart';
+import 'package:Financify/screens/settings/Privacy_Policy.dart';
+import 'package:Financify/screens/settings/Terms&Conditions.dart';
+import 'package:Financify/screens/settings/about.dart';
+import 'package:Financify/screens/start_screen/Login.dart';
+import 'package:Financify/screens/start_screen/Splash.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class settings extends StatelessWidget {
-  const settings({super.key});
+class Settings extends StatelessWidget {
+  const Settings({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class settings extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => About()),
+                  MaterialPageRoute(builder: (context) => const About()),
                 );
               },
               child: Container(
@@ -90,7 +90,7 @@ class settings extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PrivacyPolicy()));
+                    MaterialPageRoute(builder: (context) => const PrivacyPolicy()));
               },
               child: Container(
                 child: const Row(
@@ -116,7 +116,7 @@ class settings extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Terms()));
+                    context, MaterialPageRoute(builder: (context) => const Terms()));
               },
               child: Container(
                 child: const Row(
@@ -130,32 +130,6 @@ class settings extends StatelessWidget {
                     ),
                     Text(
                       "terms and conditions",
-                      style: TextStyle(fontSize: 20),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            GestureDetector(
-              onTap: () {
-                // Share.share(
-                //       'Hey! check out this new app......https://play.google.com/store/apps/details?id=in.brototype.spendee');
-              },
-              child: Container(
-                child: const Row(
-                  children: [
-                    Icon(
-                      Icons.share,
-                      size: 30,
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    Text(
-                      "Share",
                       style: TextStyle(fontSize: 20),
                     )
                   ],
@@ -227,6 +201,6 @@ class settings extends StatelessWidget {
               ),
             ],
           );
-        });
+       });
   }
 }

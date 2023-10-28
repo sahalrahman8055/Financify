@@ -1,4 +1,4 @@
-# financify
+# Financify
 
 A new Flutter project.
 

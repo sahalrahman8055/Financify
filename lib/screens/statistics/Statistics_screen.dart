@@ -1,10 +1,10 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 
-import 'package:financify/db_functions/transaction_db.dart';
-import 'package:financify/model/add_data.dart';
-import 'package:financify/screens/statistics/statistics_all.dart';
-import 'package:financify/screens/statistics/statistics_expense.dart';
-import 'package:financify/screens/statistics/statistics_income.dart';
+import 'package:Financify/db_functions/transaction_db.dart';
+import 'package:Financify/model/add_data.dart';
+import 'package:Financify/screens/statistics/statistics_all.dart';
+import 'package:Financify/screens/statistics/statistics_expense.dart';
+import 'package:Financify/screens/statistics/statistics_income.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

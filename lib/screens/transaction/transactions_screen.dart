@@ -1,7 +1,7 @@
-import 'package:financify/db_functions/transaction_db.dart';
-import 'package:financify/model/add_data.dart';
-import 'package:financify/widget/slideble_transaction.dart';
-import 'package:financify/screens/transaction/transaction_lists.dart';
+import 'package:Financify/db_functions/transaction_db.dart';
+import 'package:Financify/model/add_data.dart';
+import 'package:Financify/widget/slideble_transaction.dart';
+import 'package:Financify/screens/transaction/transaction_lists.dart';
 import 'package:flutter/material.dart';
 
 ValueNotifier<List<Add_data>> overViewListNotifier =

@@ -1,6 +1,6 @@
-import 'package:financify/model/add_data.dart';
+import 'package:Financify/model/add_data.dart';
 
-import 'package:financify/screens/transaction/transactions_screen.dart';
+import 'package:Financify/screens/transaction/transactions_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

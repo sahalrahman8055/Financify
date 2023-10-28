@@ -1,6 +1,6 @@
-import 'package:financify/db_functions/transaction_db.dart';
+import 'package:Financify/db_functions/transaction_db.dart';
 
-import 'package:financify/screens/transaction/transactions_screen.dart';
+import 'package:Financify/screens/transaction/transactions_screen.dart';
 import 'package:flutter/material.dart';
 
 class SearchField extends StatefulWidget {

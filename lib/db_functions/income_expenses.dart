@@ -1,5 +1,5 @@
-import 'package:financify/db_functions/transaction_db.dart';
-import 'package:financify/model/add_data.dart';
+import 'package:Financify/db_functions/transaction_db.dart';
+import 'package:Financify/model/add_data.dart';
 import 'package:hive/hive.dart';
 
 int totals = 0;
