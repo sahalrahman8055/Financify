@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 
 class BottomProvider extends ChangeNotifier {
 
-  BottomProvider(){
-function();
-  }
+  BottomProvider();
   List screens = [
     const HomeScreen(),
     const StatisticsScreen(),
@@ -25,7 +23,7 @@ function();
     notifyListeners();
   }
 
-  void function() {
+  Future function() async{
     indexColor == 0;
   }
 }
