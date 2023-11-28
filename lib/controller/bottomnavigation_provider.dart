@@ -5,9 +5,9 @@ import 'package:Financify/view/transaction/transaction_lists.dart';
 import 'package:flutter/material.dart';
 
 class BottomProvider extends ChangeNotifier {
-  // BottomProvider() {
-  //   function();
-  // }
+  BottomProvider() {
+    function();
+  }
   List screens = [
     const HomeScreen(),
     const StatisticsScreen(),
@@ -24,8 +24,8 @@ class BottomProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void function() {
-  //   indexColor == 0;
-  //   notifyListeners();
-  // }
+  void function() {
+    indexColor == 0;
+    notifyListeners();
+  }
 }
