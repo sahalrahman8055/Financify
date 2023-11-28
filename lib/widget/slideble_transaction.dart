@@ -1,17 +1,21 @@
-import 'package:Financify/db_functions/transaction_db.dart';
+import 'package:Financify/constants/borderredius.dart';
+import 'package:Financify/controller/slideble_provider.dart';
+import 'package:Financify/helper/colors.dart';
+import 'package:Financify/services/transaction_db.dart';
 import 'package:Financify/model/add_data.dart';
 import 'package:Financify/widget/edit_transaction.dart';
 import 'package:Financify/widget/uppercase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:provider/provider.dart';
 
 class SlidebleTransaction extends StatelessWidget {
-  SlidebleTransaction({super.key, required this.transaction});
+  const SlidebleTransaction({super.key, required this.transaction});
 
-  final List<String> days = ['mon', 'tue', 'wed', 'thur', 'fri', 'sat', 'sun'];
   final Add_data transaction;
   @override
   Widget build(BuildContext context) {
+    final DaysProvider = Provider.of<SlidebleProvider>(context, listen: false);
     return Slidable(
       endActionPane: ActionPane(motion: const StretchMotion(), children: [
         SlidableAction(
@@ -26,12 +30,9 @@ class SlidebleTransaction extends StatelessWidget {
             );
           }),
           icon: Icons.edit,
-          foregroundColor: const Color(0xFF2E49FB),
+          foregroundColor:  kRgbblueColors,
         ),
         SlidableAction(
-          // onPressed: ((context) async {
-          //    TransactionDB().deleteTransaction(transaction);
-          // }),
           onPressed: (_) {
             showDialog(
               context: context,
@@ -45,7 +46,7 @@ class SlidebleTransaction extends StatelessWidget {
                     onPressed: () => Navigator.pop(context),
                     child: const Text(
                       "Cancel",
-                      style: TextStyle(color: Colors.red),
+                      style: TextStyle(color: kRedColor),
                     ),
                   ),
 
@@ -60,27 +61,27 @@ class SlidebleTransaction extends StatelessWidget {
                       },
                       child: const Text(
                         "Delete",
-                        style: TextStyle(color: Colors.red),
+                        style: TextStyle(color: kRedColor),
                       ))
                 ],
               ),
             );
           },
           icon: Icons.delete,
-          foregroundColor: Colors.red,
+          foregroundColor: kRedColor,
         ),
       ]),
       child: Card(
-        color: Colors.white,
+        color: kWhiteColor,
         elevation: 3,
         shape: RoundedRectangleBorder(
           //<-- SEE HERE
           // side: BorderSide(width: 1),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: kRadius20,
         ),
         child: ListTile(
           leading: ClipRRect(
-            borderRadius: BorderRadius.circular(5),
+            borderRadius:kRadius5,
             child: Image.asset('assets/images/${transaction.name}.png',
                 height: 40),
           ),
@@ -92,7 +93,7 @@ class SlidebleTransaction extends StatelessWidget {
             ),
           ),
           subtitle: Text(
-            '${transaction.datetime.year}-${transaction.datetime.day}-${transaction.datetime.month}  ${days[transaction.datetime.weekday - 1]}',
+            '${transaction.datetime.year}-${transaction.datetime.day}-${transaction.datetime.month}  ${DaysProvider.days[transaction.datetime.weekday - 1]}',
             style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
           ),
           trailing: Text(
@@ -100,7 +101,7 @@ class SlidebleTransaction extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 19,
-              color: transaction.type == 'income' ? Colors.green : Colors.red,
+              color: transaction.type == 'income' ? kGreenColor : kRedColor,
             ),
           ),
         ),

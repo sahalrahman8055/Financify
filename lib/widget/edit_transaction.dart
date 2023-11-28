@@ -1,6 +1,11 @@
-import 'package:Financify/db_functions/transaction_db.dart';
+import 'package:Financify/constants/borderredius.dart';
+import 'package:Financify/constants/sizedbox.dart';
+import 'package:Financify/controller/edit_provider.dart';
+import 'package:Financify/helper/colors.dart';
+import 'package:Financify/services/transaction_db.dart';
 import 'package:Financify/model/add_data.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EditTransaction extends StatefulWidget {
   final String? id;
@@ -17,47 +22,27 @@ class EditTransaction extends StatefulWidget {
 }
 
 class _EditTransactionState extends State<EditTransaction> {
-  DateTime date = DateTime.now();
   // ignore: unused_field
-  DateTime? _selectedDateTime;
-  String? _selectedtype;
-  // ignore: unused_field
-  String? _selectedCategory;
-  // CategoryModel? _selectedCategoryModel;
-  //String? _categoryID;
-  // ignore: unused_field
-  int _value = 0;
-  TextEditingController _amountTextEditingController = TextEditingController();
-  TextEditingController _explainTextEditingController = TextEditingController();
-
-  final _formKey = GlobalKey<FormState>();
-
-  final List<String> _iteminex = ['income', 'expense'];
-
-  final List<String> _item = [
-    'food',
-    "Transfer",
-    "Transportation",
-    "Education"
-  ];
 
   @override
   void initState() {
     super.initState();
-    _value = int.parse(widget.obj.id);
-    _amountTextEditingController =
+    final controllersProvider =
+        Provider.of<EditTransactionProvider>(context, listen: false);
+    controllersProvider.value = int.parse(widget.obj.id);
+    controllersProvider.amountTextEditingController =
         TextEditingController(text: widget.obj.amount);
-    _explainTextEditingController =
+    controllersProvider.explainTextEditingController =
         TextEditingController(text: widget.obj.explain);
-    _selectedDateTime = widget.obj.datetime;
-    _selectedtype = widget.obj.type;
-    _selectedCategory = widget.obj.name;
-  } ///??
+    controllersProvider.selectedDateTime = widget.obj.datetime;
+    controllersProvider.selectedtype = widget.obj.type;
+    controllersProvider.selectedCategory = widget.obj.name;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: kBlackColor,
       body: SafeArea(
           child: Stack(
         alignment: AlignmentDirectional.center,
@@ -75,49 +60,39 @@ class _EditTransactionState extends State<EditTransaction> {
   }
 
   Container mainContainer() {
+    final formkeyProvider =
+        Provider.of<EditTransactionProvider>(context, listen: false);
     final Size size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20), color: Colors.white),
+          borderRadius: kRadius20, color: kWhiteColor),
       /*  height: 550,
       width: 340, */
       height: size.height * 0.7,
       width: size.width * 0.9,
       child: Form(
-        key: _formKey,
+        key: formkeyProvider.formKey,
         child: Column(
           children: [
-            const SizedBox(
-              height: 30,
-            ),
+            kHeight30,
             type(),
-            const SizedBox(
-              height: 20,
-            ),
+           kHeight20,
             name(),
-            const SizedBox(
-              height: 20,
-            ),
+           kHeight20,
             explain(),
-            const SizedBox(
-              height: 20,
-            ),
+           kHeight20,
             amount(),
-            const SizedBox(
-              height: 20,
-            ),
+           kHeight20,
             dateTime(),
-            const SizedBox(
-              height: 20,
-            ),
+           kHeight20,
             const Spacer(),
             GestureDetector(
               onTap: () {
-                if (_formKey.currentState!.validate()) {
+                if (formkeyProvider.formKey.currentState!.validate()) {
                   submitEditIncomeTransaction();
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                        backgroundColor: Colors.green,
+                        backgroundColor: kGreenColor,
                         content: Center(
                             child: Text('Transaction Edited Successfully'))),
                   );
@@ -126,8 +101,8 @@ class _EditTransactionState extends State<EditTransaction> {
               child: Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.black),
+                    borderRadius: kRadius15,
+                    color: kBlackColor),
                 width: 120,
                 height: 50,
                 child: const Text(
@@ -135,15 +110,13 @@ class _EditTransactionState extends State<EditTransaction> {
                   style: TextStyle(
                     fontFamily: 'f',
                     fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                    color: kWhiteColor,
                     fontSize: 17,
                   ),
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            kHeight20,
           ],
         ),
       ),
@@ -154,32 +127,34 @@ class _EditTransactionState extends State<EditTransaction> {
     return Container(
       alignment: Alignment.bottomLeft,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(width: 2, color: Colors.grey)),
+          borderRadius:kRadius10,
+          border: Border.all(width: 2, color: kGreyColor)),
       width: 300,
-      child: TextButton(
-        //child: Text('${widget.obj.datetime}'),
-        onPressed: () async {
-          DateTime? newDate = await showDatePicker(
-              context: context,
-              initialDate: widget.obj.datetime,
-              //initialDate: DateTime.now(),
-              firstDate: DateTime(2020),
-              lastDate: DateTime(2100));
-          // ignore: unrelated_type_equality_checks
-          if (newDate == Null) return;
-          setState(() {
-            date = newDate!;
-          });
-        },
+      child: Consumer<EditTransactionProvider>(
+        builder: (context, dateProvider, child) {
+          return TextButton(
+            //child: Text('${widget.obj.datetime}'),
+            onPressed: () async {
+              DateTime? newDate = await showDatePicker(
+                  context: context,
+                  initialDate: widget.obj.datetime,
+                  //initialDate: DateTime.now(),
+                  firstDate: DateTime(2020),
+                  lastDate: DateTime(2100));
+              // ignore: unrelated_type_equality_checks
+              if (newDate == Null) return;
+              dateProvider.editDate(newDate!);
+            },
 
-        child: Text(
-          'Date : ${date.year}/${date.month}/${date.day}',
-          style: const TextStyle(
-              fontSize: 16,
-              //fontWeight: FontWeight.normal,
-              color: Colors.black),
-        ),
+            child: Text(
+              'Date : ${dateProvider.date.year}/${dateProvider.date.month}/${dateProvider.date.day}',
+              style: const TextStyle(
+                  fontSize: 16,
+                  //fontWeight: FontWeight.normal,
+                  color: kBlackColor),
+            ),
+          );
+        },
       ),
     );
   }
@@ -191,67 +166,59 @@ class _EditTransactionState extends State<EditTransaction> {
           padding: const EdgeInsetsDirectional.symmetric(horizontal: 15),
           width: 300,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: kRadius10,
             border: Border.all(
               width: 2,
-              color: Colors.grey,
+              color: kGreyColor,
             ),
           ),
           child: SingleChildScrollView(
-            child: DropdownButtonFormField<String>(
-              hint: Row(
-                children: [
-                  // ignore: sized_box_for_whitespace
-                  Container(
-                    width: 40,
-                    child: Image.asset('assets/images/${widget.obj.type}.png'),
+            child: Consumer<EditTransactionProvider>(
+              builder: (context, typeProvider, child) {
+                return DropdownButtonFormField<String>(
+                  hint: Row(
+                    children: [
+                      // ignore: sized_bkWhiteColorspace
+                      Container(
+                        width: 40,
+                        child:
+                            Image.asset('assets/images/${widget.obj.type}.png'),
+                      ),
+                      // ignore: unnecessary_string_interpolations
+                      Text('${widget.obj.type}',
+                          style: const TextStyle(color: kBlackColor)),
+                    ],
                   ),
-                  // ignore: unnecessary_string_interpolations
-                  Text('${widget.obj.type}',
-                      style: const TextStyle(color: Colors.black)),
-                ],
-              ),
-              value: _selectedtype,
-
-              onChanged: ((value) {
-                setState(() {
-                  _selectedtype = value!;
-                });
-              }),
-
-              items: _iteminex
-                  .map((e) => DropdownMenuItem(
-                        value: e,
-                        child: Row(
-                          children: [
-                            const SizedBox(
-                              width: 10,
+                  value: typeProvider.selectedtype,
+                  onChanged: ((value) {
+                    typeProvider.selectedtype = value!;
+                  }),
+                  items: typeProvider.iteminex
+                      .map((e) => DropdownMenuItem(
+                            value: e,
+                            child: Row(
+                              children: [
+                                kwidtht10,
+                                Text(
+                                  e,
+                                  style: const TextStyle(fontSize: 17),
+                                )
+                              ],
                             ),
-                            Text(
-                              e,
-                              style: const TextStyle(fontSize: 17),
-                            )
-                          ],
-                        ),
-                      ))
-                  .toList(),
-
-              dropdownColor: Colors.white,
-              isExpanded: true,
-              //underline: Container(),
-              // validator: (value) {
-              //   if (value == null || value.isEmpty) {
-              //     return 'Select finanace';
-              //   } else {
-              //     return null;
-              //   }
-              // },
+                          ))
+                      .toList(),
+                  dropdownColor: kWhiteColor,
+                  isExpanded: true,
+                );
+              },
             ),
           )),
     );
   }
 
   Padding amount() {
+    final amountProvider =
+        Provider.of<EditTransactionProvider>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: SizedBox(
@@ -266,22 +233,22 @@ class _EditTransactionState extends State<EditTransaction> {
           },
           keyboardType: TextInputType.number,
           //focusNode: amount,
-          controller: _amountTextEditingController,
+          controller: amountProvider.amountTextEditingController,
           decoration: InputDecoration(
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             labelText: 'Amount',
-            labelStyle: const TextStyle(fontSize: 17, color: Colors.grey),
+            labelStyle: const TextStyle(fontSize: 17, color: kGreyColor),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(width: 2, color: Colors.black),
+              borderRadius: kRadius10,
+              borderSide: const BorderSide(width: 2, color: kBlackColor),
             ),
             enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(width: 2, color: Colors.grey)),
+                borderRadius: kRadius10,
+                borderSide: const BorderSide(width: 2, color: kGreyColor)),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
-                borderSide: const BorderSide(width: 2, color: Colors.black)),
+                borderRadius: kRadius15,
+                borderSide: const BorderSide(width: 2, color: kBlackColor)),
           ),
         ),
       ),
@@ -289,28 +256,30 @@ class _EditTransactionState extends State<EditTransaction> {
   }
 
   Padding explain() {
+    final explainProvider =
+        Provider.of<EditTransactionProvider>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: SizedBox(
         width: 300,
         child: TextField(
           //focusNode: ex,
-          controller: _explainTextEditingController,
+          controller: explainProvider.explainTextEditingController,
           decoration: InputDecoration(
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             labelText: 'explain',
-            labelStyle: const TextStyle(fontSize: 17, color: Colors.grey),
+            labelStyle: const TextStyle(fontSize: 17, color: kGreyColor),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(width: 2, color: Colors.black),
+              borderRadius: kRadius10,
+              borderSide: const BorderSide(width: 2, color: kBlackColor),
             ),
             enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(width: 2, color: Colors.grey)),
+                borderRadius: kRadius10,
+                borderSide: const BorderSide(width: 2, color: kGreyColor)),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
-                borderSide: const BorderSide(width: 2, color: Colors.black)),
+                borderRadius: kRadius15,
+                borderSide: const BorderSide(width: 2, color: kBlackColor)),
           ),
         ),
       ),
@@ -324,74 +293,77 @@ class _EditTransactionState extends State<EditTransaction> {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         width: 300,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius:kRadius10,
           border: Border.all(
             width: 2,
             color: const Color(0xffC5C5C5),
           ),
         ),
-        child: DropdownButtonFormField<String>(
-          hint: Row(
-            children: [
-              // ignore: sized_box_for_whitespace
-              Container(
-                width: 40,
-                child: Image.asset('assets/images/${widget.obj.name}.png'),
-              ),
-              Text('${widget.obj.name} ',
-                  style: const TextStyle(color: Colors.black)),
-            ],
-          ),
-          // value: selctedItem,
-          onChanged: (value) {
-            setState(() {
-              _selectedCategory = value!;
-            });
-          },
-          items: _item
-              .map(
-                (e) => DropdownMenuItem<String>(
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 40,
-                          child: Image.asset('assets/images/${e}.png'),
-                        ),
-                        const SizedBox(width: 10),
-                        Text(
-                          e,
-                          style: const TextStyle(fontSize: 18),
-                        )
-                      ],
-                    ),
+        child: Consumer<EditTransactionProvider>(
+          builder: (context, categoryProvider, child) {
+            return DropdownButtonFormField<String>(
+              hint: Row(
+                children: [
+                  // ignore: sized_bkWhiteColorspace
+                  Container(
+                    width: 40,
+                    child: Image.asset('assets/images/${widget.obj.name}.png'),
                   ),
-                  value: e,
-                ),
-              )
-              .toList(),
-          selectedItemBuilder: (BuildContext context) => _item
-              .map(
-                (e) => Row(
-                  children: [
-                    SizedBox(
-                      width: 42,
-                      child: Image.asset('images/$e.png'),
+                  Text('${widget.obj.name} ',
+                      style: const TextStyle(color: kBlackColor)),
+                ],
+              ),
+              // value: selctedItem,
+              onChanged: (value) {
+                categoryProvider.selectedCategory = value!;
+              },
+              items: categoryProvider.item
+                  .map(
+                    (e) => DropdownMenuItem<String>(
+                      value: e,
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 40,
+                              child: Image.asset('assets/images/${e}.png'),
+                            ),
+                           kwidtht10,
+                            Text(
+                              e,
+                              style: const TextStyle(fontSize: 18),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
-                    const SizedBox(width: 5),
-                    Text(e),
-                  ],
-                ),
-              )
-              .toList(),
-          decoration: const InputDecoration(
-            hintText: 'Category',
-            hintStyle: TextStyle(color: Colors.grey),
-            border: InputBorder.none,
-          ),
-          dropdownColor: Colors.white,
-          isExpanded: true,
+                  )
+                  .toList(),
+              selectedItemBuilder: (BuildContext context) =>
+                  categoryProvider.item
+                      .map(
+                        (e) => Row(
+                          children: [
+                            SizedBox(
+                              width: 42,
+                              child: Image.asset('assets/images/$e.png'),
+                            ),
+                            kwidtht5,
+                            Text(e),
+                          ],
+                        ),
+                      )
+                      .toList(),
+              decoration: const InputDecoration(
+                hintText: 'Category',
+                hintStyle: TextStyle(color: kGreyColor),
+                border: InputBorder.none,
+              ),
+              dropdownColor: kWhiteColor,
+              isExpanded: true,
+            );
+          },
         ),
       ),
     );
@@ -404,15 +376,12 @@ class _EditTransactionState extends State<EditTransaction> {
           width: double.infinity,
           height: 240,
           decoration: const BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
-            ),
+            color: kBlackColor,
+            borderRadius: kRadius
           ),
           child: Column(
             children: [
-              const SizedBox(height: 40),
+              kHeight40,
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Row(
@@ -423,7 +392,7 @@ class _EditTransactionState extends State<EditTransaction> {
                       onTap: () {
                         Navigator.of(context).pop();
                       },
-                      child: const Icon(Icons.arrow_back, color: Colors.white),
+                      child: const Icon(Icons.arrow_back, color: kWhiteColor),
                     ),
                     const Center(
                       child: Text(
@@ -431,10 +400,10 @@ class _EditTransactionState extends State<EditTransaction> {
                         style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.w600,
-                            color: Colors.white),
+                            color: kWhiteColor),
                       ),
                     ),
-                    const Icon(Icons.add_task_rounded, color: Colors.white)
+                    const Icon(Icons.add_task_rounded, color: kWhiteColor)
                   ],
                 ),
               )
@@ -446,15 +415,18 @@ class _EditTransactionState extends State<EditTransaction> {
   }
 
   Future<void> submitEditIncomeTransaction() async {
-    final _explainText = _explainTextEditingController.text;
-    final _amountText = _amountTextEditingController.text;
+    final SubmitProvider =
+        Provider.of<EditTransactionProvider>(context, listen: false);
+
+    final _explainText = SubmitProvider.explainTextEditingController.text;
+    final _amountText = SubmitProvider.amountTextEditingController.text;
 
     final model = Add_data(
-        type: _selectedtype!,
+        type: SubmitProvider.selectedtype!,
         amount: _amountText,
-        datetime: date,
+        datetime: SubmitProvider.date,
         explain: _explainText,
-        name: _selectedCategory!,
+        name: SubmitProvider.selectedCategory!,
         id: widget.obj.id);
 
     await TransactionDB.instance.editTransaction(model);

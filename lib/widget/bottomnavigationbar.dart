@@ -1,103 +1,95 @@
-import 'package:Financify/screens/settings/settings_Screen.dart';
-import 'package:Financify/screens/statistics/Statistics_screen.dart';
-import 'package:Financify/screens/addscreen/add_screen.dart';
-import 'package:Financify/screens/home_screen/home_screen.dart';
+import 'package:Financify/constants/sizedbox.dart';
+import 'package:Financify/controller/bottomnavigation_provider.dart';
+import 'package:Financify/helper/colors.dart';
+import 'package:Financify/view/addscreen/add_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../screens/transaction/transaction_lists.dart';
+class BottomBar extends StatelessWidget {
+  const BottomBar({Key? key});
 
-class BottomBar extends StatefulWidget {
-  const BottomBar({super.key});
-
-  @override
-  State<BottomBar> createState() => _Bottom_BarState();
-}
-
-class _Bottom_BarState extends State<BottomBar> {
-  int index_color = 0;
-  List Screen = [
-    const home_screen(),
-    const StatisticsScreen(),
-    TransactionList(),
-    const Settings(),
-  ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Screen[index_color],
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => const AddScreen()));
-        },
-        child: const Icon(Icons.add),
-        backgroundColor: Colors.black,
-        elevation:
-            10, // Adjust the elevation value to control the shadow's depth
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 8, bottom: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    index_color = 0;
-                  });
-                },
-                child: Icon(
-                  Icons.home_rounded,
-                  size: 30,
-                  color: index_color == 0 ? Colors.black : Colors.grey,
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    index_color = 1;
-                  });
-                },
-                child: Icon(
-                  Icons.bar_chart_rounded,
-                  size: 30,
-                  color: index_color == 1 ? Colors.black : Colors.grey,
-                ),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    index_color = 2;
-                  });
-                },
-                child: Icon(
-                  Icons.find_replace_outlined,
-                  size: 30,
-                  color: index_color == 2 ? Colors.black : Colors.grey,
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    index_color = 3;
-                  });
-                },
-                child: Icon(
-                  Icons.settings,
-                  size: 30,
-                  color: index_color == 3 ? Colors.black : Colors.grey,
-                ),
-              ),
-            ],
+    return Consumer<BottomProvider>(
+      builder: (context, bottomProvider, child) {
+        return Scaffold(
+          body: bottomProvider.screens[bottomProvider.indexColor],
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => AddScreen(),
+              ));
+            },
+            backgroundColor: kBlackColor,
+            elevation: 10,
+            child: const Icon(
+              Icons.add,
+            ),
           ),
-        ),
-      ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          bottomNavigationBar: BottomAppBar(
+            shape: const CircularNotchedRectangle(),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8, bottom: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      bottomProvider.indexColors(0);
+                    },
+                    child: Icon(
+                      Icons.home_rounded,
+                      size: 30,
+                      color: bottomProvider.indexColor == 0
+                          ? kBlackColor
+                          : kGreyColor,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      bottomProvider.indexColors(1);
+                    },
+                    child: Icon(
+                      Icons.bar_chart_rounded,
+                      size: 30,
+                      color: bottomProvider.indexColor == 1
+                          ? kBlackColor
+                          : kGreyColor,
+                    ),
+                  ),
+                kHeight20,
+                  GestureDetector(
+                    onTap: () {
+                      bottomProvider.indexColors(2);
+                    },
+                    child: Icon(
+                      Icons.find_replace_outlined,
+                      size: 30,
+                      color: bottomProvider.indexColor == 2
+                          ? kBlackColor
+                          : kGreyColor,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      bottomProvider.indexColors(3);
+                    },
+                    child: Icon(
+                      Icons.settings,
+                      size: 30,
+                      color: bottomProvider.indexColor == 3
+                          ?kBlackColor
+                          : kGreyColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

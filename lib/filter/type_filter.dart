@@ -1,5 +1,5 @@
-
-import 'package:Financify/screens/transaction/transaction_lists.dart';
+import 'package:Financify/constants/borderredius.dart';
+import 'package:Financify/view/transaction/transaction_lists.dart';
 import 'package:flutter/material.dart';
 
 class TypeFilterClass extends StatelessWidget {
@@ -9,9 +9,7 @@ class TypeFilterClass extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopupMenuButton(
         shape: ContinuousRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            20,
-          ),
+          borderRadius:kRadius20
         ),
         itemBuilder: ((context) => [
               PopupMenuItem(
