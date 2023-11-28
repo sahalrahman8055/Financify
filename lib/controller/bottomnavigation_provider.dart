@@ -5,8 +5,6 @@ import 'package:Financify/view/transaction/transaction_lists.dart';
 import 'package:flutter/material.dart';
 
 class BottomProvider extends ChangeNotifier {
-
-  
   List screens = [
     const HomeScreen(),
     const StatisticsScreen(),
